@@ -65,7 +65,7 @@ public class CallTrends extends Activity {
                   android.provider.CallLog.Calls.TYPE);
         
         // Will hold the calls, available to the cursor
-        ArrayList<String> callList = new ArrayList<String>();
+        ////ArrayList<String> callList = new ArrayList<String>();
         
         // Loop through all entries the cursor provides to us.
         while (!(c.isAfterLast())){
@@ -74,41 +74,39 @@ public class CallTrends extends Activity {
             int callType = c.getInt(typeColumn);
             Date date=new Date(callDate);
 
-            callList.add("  | # " + callerPhoneNumber + "  | Call date: " + date + " | Call type:"+ callType);
+            ////callList.add("  | # " + callerPhoneNumber + "  | Call date: " + date + " | Call type:"+ callType);
 
-        }
-
-        DefaultHttpClient httpclient = new DefaultHttpClient(); 
+            DefaultHttpClient httpclient = new DefaultHttpClient(); 
         
-        HttpResponse response; 
-        try {
+            HttpResponse response; 
+            try {
         	
-
-            // Preparing the post operation 
-            HttpPost httpost = new HttpPost("http://calltrends.appspot.com/datain");
+            	// Preparing the post operation 
+            	HttpPost httpost = new HttpPost("http://calltrends.appspot.com/datain");
             
-            List <NameValuePair> nvps = new ArrayList <NameValuePair>();
-            nvps.add(new BasicNameValuePair("email", "youremail@email.org"));
-            nvps.add(new BasicNameValuePair("password", "somepassword"));
+            	List <NameValuePair> namevaluepair = new ArrayList <NameValuePair>();
+            	namevaluepair.add(new BasicNameValuePair("name", "name"));
+            	namevaluepair.add(new BasicNameValuePair("password", "somepassword"));
               
-            httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+            	httpost.setEntity(new UrlEncodedFormEntity(namevaluepair, HTTP.UTF_8));
               
-            // Post, check and show the result (not really spectacular, but works):
-            response = httpclient.execute(httpost);
+            	// Post, check and show the result (not really spectacular, but works):
+            	response = httpclient.execute(httpost);
               
-            Log.d("httpPost", "Response : " + response.getStatusLine());
+            	Log.d("httpPost", "Response : " + response.getStatusLine());
 
-            textMsg.setText("Response: " + response.getStatusLine());
+            	textMsg.setText("Response: " + response.getStatusLine());
               
-         } catch (ClientProtocolException e) {
-              Log.e("httpPost", e.getMessage());
-              e.printStackTrace();
-         } catch (IOException e) {
-              Log.e("httpPost", e.getMessage());
-              e.printStackTrace();
-         } catch (Exception e) {
-              Log.e("httpPost", e.getMessage());
-              e.printStackTrace();
-         }
+            } catch (ClientProtocolException e) {
+            	Log.e("httpPost", e.getMessage());
+            	e.printStackTrace();
+            } catch (IOException e) {
+            	Log.e("httpPost", e.getMessage());
+            	e.printStackTrace();
+            } catch (Exception e) {
+            	Log.e("httpPost", e.getMessage());
+            	e.printStackTrace();
+            }
+        }      
     }   
 }
